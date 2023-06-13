@@ -9,7 +9,7 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
-    let itemArray = ["Hello", "World", "Again"]
+    var itemArray = ["Hello", "World", "Again"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,13 @@ class TodoListViewController: UITableViewController {
     }
     
     
+    
+    //MARK: - Add button
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        print("Ok")
+        itemArray.append("new item")
+        tableView.reloadData()
+    }
     
 }
 
