@@ -17,8 +17,8 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-//        loadItems()
+//        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        loadItems()
     }
     
     //MARK: - Tableview Datasource Methods
@@ -83,17 +83,14 @@ class TodoListViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-//    func loadItems() {
-//        if let data = try? Data(contentsOf: dataFilePath!) {
-//            let decoder = PropertyListDecoder()
-//            do {
-//
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//        }
-//
-//    }
+    func loadItems() {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        do {
+           itemArray =  try context.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+    }
     
 }
 
