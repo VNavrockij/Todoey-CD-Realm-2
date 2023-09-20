@@ -37,6 +37,19 @@ class CategoryTableViewController: UITableViewController {
         
         return cell
     }
+
+    //MARK: - TableView Delegate Methods
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToItems", sender: self)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! TodoListViewController
+
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categories[indexPath.row]
+        }
+    }
     
     //MARK: - TableView Manipulations Methods
     func saveCategories() {
@@ -59,9 +72,7 @@ class CategoryTableViewController: UITableViewController {
         tableView.reloadData()
 
     }
-    
-    
-    //MARK: - TableView Delegate Methods
+
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
